@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TCW AND HISTORY ACTIVITIES COMPILATION</title>
+    <style>
+      :root {
+        --ink: #0f172a;
+        --muted: #64748b;
+        --surface: #ffffff;
+        --border: #e2e8f0;
+        --brand: #1e3a8a;
+        --brand-hover: #1d4ed8;
+        --brand-soft: #e8eefc;
+        --danger: #b91c1c;
+        --danger-soft: #fef2f2;
+        --radius: 14px;
+        --shadow: 0 4px 24px rgba(30, 58, 138, 0.08);
+        --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      }
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Arial,
+          sans-serif;
+        color: var(--ink);
+        line-height: 1.5;
+        background: #f8fafc;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(30, 58, 138, 0.96);
+        backdrop-filter: blur(8px);
+        color: white;
+        padding: 14px 24px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+        box-shadow: var(--shadow-sm);
+      }
+      nav a {
+        color: rgba(255, 255, 255, 0.92);
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.875rem;
+        letter-spacing: 0.02em;
+        padding: 8px 14px;
+        border-radius: 8px;
+        transition:
+          background 0.15s ease,
+          color 0.15s ease;
+      }
+      nav a.active {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+      }
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+      }
+      nav a:focus-visible,
+      .member-link:focus-visible,
+      .btn:focus-visible,
+      .input-field:focus-visible,
+      .input-file:focus-visible {
+        outline: 3px solid rgba(255, 255, 255, 0.7);
+        outline-offset: 2px;
+      }
+      section {
+        display: none;
+        padding: 0;
+      }
+      section.active {
+        display: block;
+      }
+
+      /* HOME */
+      #home {
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        background: url("https://images.unsplash.com/photo-1461360370896-922624d12aa1")
+          no-repeat center/cover;
+      }
+      #home.active {
+        display: flex;
+      }
+      .overlay {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 40px 34px;
+        border-radius: 15px;
+        width: min(760px, 92vw);
+        box-sizing: border-box;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.35);
+      }
+      .overlay h1 {
+        margin: 0 0 12px;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+      .overlay p {
+        margin: 0;
+        font-size: 1.02rem;
+      }
+      .home-cover-photo {
+        display: block;
+        width: min(320px, 72%);
+        aspect-ratio: 3 / 4;
+        height: auto;
+        margin: 0 auto 20px;
+        border-radius: 10px;
+        object-fit: contain;
+        object-position: center;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.45);
+      }
+
+      /* MEMBERS & ACTIVITIES shared */
+      #members,
+      #activities {
+        min-height: calc(100vh - 52px);
+        background: linear-gradient(
+          165deg,
+          #f1f5f9 0%,
+          #e8eefc 42%,
+          #f8fafc 100%
+        );
+      }
+      .page-shell {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 32px 20px 48px;
+      }
+      .page-header {
+        margin-bottom: 28px;
+      }
+      .page-header h2 {
+        margin: 0 0 8px;
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+      }
+      .page-lead {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--muted);
+        line-height: 1.55;
+        max-width: 42rem;
+      }
+
+      /* MEMBERS */
+      .member-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 24px;
+      }
+      .member-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 30px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+        overflow: hidden;
+        position: relative;
+      }
+      .member-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 120px;
+        background: linear-gradient(
+          135deg,
+          rgba(30, 58, 138, 0.9) 0%,
+          rgba(59, 91, 219, 0.88) 55%,
+          rgba(96, 165, 250, 0.9) 100%
+        );
+      }
+      .member-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 18px 42px rgba(30, 58, 138, 0.16);
+      }
+      .member-avatar {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center 22%;
+        display: block;
+        border: 4px solid rgba(30, 58, 138, 0.14);
+        background: #dbeafe;
+        box-shadow: 0 10px 28px rgba(30, 58, 138, 0.2);
+        margin-top: 26px;
+        position: relative;
+        z-index: 1;
+      }
+      .member-name {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .member-role {
+        margin: 0;
+        font-size: 0.875rem;
+        color: var(--muted);
+      }
+      .member-link {
+        margin-top: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--brand);
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 8px;
+        background: var(--brand-soft);
+        border: 1px solid rgba(30, 58, 138, 0.15);
+        transition:
+          background 0.15s ease,
+          color 0.15s ease,
+          border-color 0.15s ease;
+      }
+      .member-link:hover {
+        background: var(--brand);
+        color: white;
+        border-color: var(--brand);
+      }
+      .member-card > div,
+      .member-card > a {
+        position: relative;
+        z-index: 1;
+      }
+
+      @media (max-width: 640px) {
+        nav {
+          justify-content: center;
+          padding: 12px;
+        }
+        .page-shell {
+          padding: 24px 14px 40px;
+        }
+        .member-grid {
+          grid-template-columns: 1fr;
+        }
+        .member-avatar {
+          width: 130px;
+          height: 130px;
+          margin-top: 24px;
+        }
+        .member-card::before {
+          height: 96px;
+        }
+      }
+
+      /* ACTIVITIES */
+      .card-panel {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 22px 24px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(226, 232, 240, 0.9);
+        margin-bottom: 24px;
+      }
+      .card-panel label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+      .toolbar-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+      .input-field {
+        flex: 1;
+        min-width: 200px;
+        padding: 12px 14px;
+        font-size: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #fafbfc;
+        color: var(--ink);
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .input-field:focus {
+        outline: none;
+        border-color: var(--brand);
+        box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.2);
+        background: var(--surface);
+      }
+      .input-field::placeholder {
+        color: #94a3b8;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 11px 18px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        font-family: inherit;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition:
+          background 0.15s ease,
+          color 0.15s ease,
+          border-color 0.15s ease,
+          transform 0.1s ease;
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .btn-primary {
+        background: var(--brand);
+        color: white;
+      }
+      .btn-primary:hover {
+        background: var(--brand-hover);
+      }
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--brand);
+        border-color: rgba(30, 58, 138, 0.25);
+      }
+      .btn-secondary:hover {
+        background: var(--brand-soft);
+      }
+      .btn-danger {
+        background: var(--danger-soft);
+        color: var(--danger);
+        border-color: rgba(185, 28, 28, 0.25);
+      }
+      .btn-danger:hover {
+        background: #fee2e2;
+      }
+      .btn-sm {
+        padding: 7px 12px;
+        font-size: 0.8125rem;
+      }
+
+      .folder-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .folder {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 20px 22px;
+        border: 1px solid rgba(226, 232, 240, 0.9);
+        box-shadow: var(--shadow-sm);
+      }
+      .folder-header-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 14px;
+      }
+      .folder-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
+      }
+      .folder-header-row .folder-title {
+        margin: 0;
+      }
+      .folder-title {
+        margin: 0 0 14px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .folder-title::before {
+        content: "";
+        width: 8px;
+        height: 28px;
+        border-radius: 4px;
+        background: linear-gradient(180deg, var(--brand), #6366f1);
+        flex-shrink: 0;
+      }
+      .folder-add-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .input-file {
+        font-size: 0.8125rem;
+        color: var(--muted);
+      }
+      .file-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .file-list li {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 14px;
+        padding: 12px 14px;
+        margin-bottom: 8px;
+        background: #f8fafc;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        font-size: 0.9rem;
+      }
+      .file-list li:last-child {
+        margin-bottom: 0;
+      }
+      .file-name {
+        flex: 1;
+        min-width: 140px;
+        color: var(--ink);
+        font-weight: 500;
+      }
+      .file-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .file-list-placeholder {
+        background: transparent;
+        border-style: dashed;
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .empty-folders {
+        text-align: center;
+        padding: 40px 24px;
+        color: var(--muted);
+        font-size: 0.95rem;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: var(--radius);
+        border: 1px dashed var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="active" href="#" data-page="home">HOME</a>
+      <a href="#" data-page="members">MEMBERS</a>
+      <a href="#" data-page="activities">ACTIVITIES</a>
+    </nav>
+
+    <!-- HOME -->
+    <section id="home" class="active">
+      <div class="overlay">
+        <img
+          class="home-cover-photo"
+          src="40f9ccc0-653e-4015-84f5-fc1548558e8b.jpg"
+          alt="Home cover photo"
+        />
+        <h1>TCW AND HISTORY ACTIVITIES COMPILATION</h1>
+        <p>
+          <i
+            >"History is not a burden on the memory but an illumination of the
+            soul."</i
+          >
+        </p>
+      </div>
+    </section>
+
+    <!-- MEMBERS -->
+    <section id="members">
+      <div class="page-shell">
+        <header class="page-header">
+          <h2>Members</h2>
+        </header>
+        <div class="member-grid">
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="0370c42a-97ff-45eb-85c3-9d4e4469a7f2.jpg"
+              alt="Rodel Mae Flores Sumbeling"
+            />
+            <div>
+              <h3 class="member-name">Rodel Mae Flores Sumbeling</h3>
+              <p class="member-role">Student</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/rodel.mae.sumbeling.2024"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="d8e7e7ea-a043-4b01-b512-7a139a67596d.jpg"
+              alt="April Ann Caday Asa"
+            />
+            <div>
+              <h3 class="member-name">April Ann Caday Asa</h3>
+              <p class="member-role">Student</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/aprilanndump"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="1f1e313e-e2fc-46a8-bd9b-1c9c51af2888.jpg"
+              alt="Julia Mae Gimena"
+            />
+            <div>
+              <h3 class="member-name">Julia Mae Gimena</h3>
+              <p class="member-role">Student</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/julia.mae.gimena"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="ee6db1cb-366b-460d-bc27-b1c135fac704.jpg"
+              alt="Rosemarie Jerlyn Amor Soliva"
+            />
+            <div>
+              <h3 class="member-name">Rosemarie Jerlyn Amor Soliva</h3>
+              <p class="member-role">Student</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/rosemarie.avilus"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="4f2b66a7-9e9c-4a86-abcf-6f655f1e2e9d.jpg"
+              alt="Valerie Bunag"
+            />
+            <div>
+              <h3 class="member-name">Kim Valerie Bunag</h3>
+              <p class="member-role">Student</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/kimvalerie.bunag.1"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="4ca3657a-b931-4e30-90e6-4a1cb26e1a22.jpg"
+              alt="Danica Albiar"
+            />
+            <div>
+              <h3 class="member-name">Danica Albiar</h3>
+              <p class="member-role">Student</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/danica.escarlan"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="636e2846-a11c-4c4e-afa2-8101ea69ab6b.jpg"
+              alt="Joan Marie Serot"
+            />
+            <div>
+              <h3 class="member-name">Joan Marie Serot</h3>
+              <p class="member-role">Student</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/joanmarie.regatonserot"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="1f2c12c6-2eaf-46b9-97ce-d2f5083d391c.jpg"
+              alt="Jonna Mae Maico"
+            />
+            <div>
+              <h3 class="member-name">Jonna Mae Maico</h3>
+              <p class="member-role">Contributor</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/jonnamea.maico"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="29f927de-1906-43cf-9558-7cb75486cdb9.jpg"
+              alt="Chris Ivan Costin"
+            />
+            <div>
+              <h3 class="member-name">Chris Ivan Costin</h3>
+              <p class="member-role">Student</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/VanCostin"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+          <article class="member-card">
+            <img
+              class="member-avatar"
+              src="39ffecfc-4a19-4f2c-b4c1-3da248e9b52e.jpg"
+              alt="Angelo Alvero"
+            />
+            <div>
+              <h3 class="member-name">Angelo Alvero</h3>
+              <p class="member-role">Student</p>
+            </div>
+            <a
+              class="member-link"
+              href="https://www.facebook.com/gelo.alvero.2024"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View profile →</a
+            >
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTIVITIES -->
+    <section id="activities">
+      <div class="page-shell">
+        <header class="page-header">
+          <h2>Activities</h2>
+          <p class="page-lead">
+            Organize materials into folders and attach files. Use
+            <strong>Add folder</strong> to start a new group, then upload
+            documents for each activity.
+          </p>
+        </header>
+
+        <div class="card-panel">
+          <label for="folderName">New folder</label>
+          <div class="toolbar-row">
+            <input
+              type="text"
+              id="folderName"
+              class="input-field"
+              placeholder="e.g. Week 3 — Primary sources"
+              autocomplete="off"
+            />
+            <button type="button" class="btn btn-primary" onclick="addFolder()">
+              Add folder
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="folders"
+          class="folder-grid"
+          role="region"
+          aria-label="Activity folders"
+        ></div>
+      </div>
+    </section>
+
+    <script>
+      function showPage(pageId) {
+        const target = document.getElementById(pageId);
+        if (!target) return;
+
+        document
+          .querySelectorAll("section")
+          .forEach((sec) => sec.classList.remove("active"));
+        target.classList.add("active");
+
+        document.querySelectorAll("nav a").forEach((link) => {
+          const isActive = link.dataset.page === pageId;
+          link.classList.toggle("active", isActive);
+          if (isActive) {
+            link.setAttribute("aria-current", "page");
+          } else {
+            link.removeAttribute("aria-current");
+          }
+        });
+
+        window.scrollTo(0, 0);
+      }
+
+      document.querySelector("nav").addEventListener("click", (e) => {
+        const link = e.target.closest("a[data-page]");
+        if (!link) return;
+        e.preventDefault();
+        const pageId = link.dataset.page;
+        if (pageId) showPage(pageId);
+      });
+
+      const STORAGE_KEY = "cris_activities_v1";
+      // localStorage is limited in size. Storing very large files may fail.
+      // Keep this reasonably small to reduce the risk of quota errors.
+      const MAX_STORE_BYTES = 2 * 1024 * 1024; // 2MB
+
+      let folders = [];
+
+      function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ folders }));
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const parsed = JSON.parse(raw);
+          folders = Array.isArray(parsed?.folders) ? parsed.folders : [];
+        } catch {
+          // If storage is corrupted or unavailable, just start fresh.
+          folders = [];
+        }
+      }
+
+      function fileToDataUrl(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () =>
+            reject(reader.error || new Error("Failed to read file"));
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function dataUrlToBlob(dataUrl) {
+        const parts = dataUrl.split(",");
+        const meta = parts[0] || "";
+        const base64 = parts[1] || "";
+        const mimeMatch = meta.match(/data:([^;]+);base64/);
+        const mime = mimeMatch ? mimeMatch[1] : "application/octet-stream";
+
+        const binary = atob(base64);
+        const len = binary.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i);
+
+        return new Blob([bytes], { type: mime });
+      }
+
+      function addFolder() {
+        const name = document.getElementById("folderName").value;
+        if (!name) return;
+
+        const folder = { name: name, files: [] };
+        folders.push(folder);
+        document.getElementById("folderName").value = "";
+        renderFolders();
+        saveState();
+      }
+
+      async function addFile(folderIndex, input) {
+        const file = input.files[0];
+        if (!file) return;
+
+        // Store file content so it survives refresh (for small files).
+        // For large files, we store only name/type and ask the user to re-upload after refresh.
+        const entry = {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          dataUrl: null,
+        };
+
+        try {
+          if (file.size <= MAX_STORE_BYTES) {
+            entry.dataUrl = await fileToDataUrl(file);
+          } else {
+            entry.dataUrl = null;
+          }
+        } catch {
+          entry.dataUrl = null;
+        }
+
+        folders[folderIndex].files.push(entry);
+        input.value = "";
+        renderFolders();
+        saveState();
+      }
+
+      function deleteFile(folderIndex, fileIndex) {
+        folders[folderIndex].files.splice(fileIndex, 1);
+        renderFolders();
+        saveState();
+      }
+
+      function renameFolder(folderIndex) {
+        const currentName = folders[folderIndex]?.name;
+        const newName = prompt("Update folder name:", currentName);
+        if (!newName) return;
+
+        const trimmed = newName.trim();
+        if (!trimmed) return;
+
+        folders[folderIndex].name = trimmed;
+        renderFolders();
+        saveState();
+      }
+
+      function deleteFolder(folderIndex) {
+        const folderName = folders[folderIndex]?.name || "this folder";
+        const ok = confirm(`Delete "${folderName}" and all its files?`);
+        if (!ok) return;
+
+        folders.splice(folderIndex, 1);
+        renderFolders();
+        saveState();
+      }
+
+      function viewFile(fileEntry) {
+        if (!fileEntry) return;
+
+        if (fileEntry.dataUrl) {
+          const blob = dataUrlToBlob(fileEntry.dataUrl);
+          const url = URL.createObjectURL(blob);
+          window.open(url, "_blank");
+          return;
+        }
+
+        alert(
+          "This file content was not stored. Please re-upload it after refresh.",
+        );
+      }
+
+      /** Used by inline handlers — `folders` is not on window, so pass indices instead. */
+      function viewFileAt(folderIndex, fileIndex) {
+        const entry = folders[folderIndex]?.files?.[fileIndex];
+        viewFile(entry);
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      function renderFolders() {
+        const container = document.getElementById("folders");
+        container.innerHTML = "";
+
+        if (folders.length === 0) {
+          container.innerHTML =
+            '<p class="empty-folders">No folders yet. Name a folder above and click <strong>Add folder</strong>.</p>';
+          return;
+        }
+
+        folders.forEach((folder, i) => {
+          const div = document.createElement("div");
+          div.className = "folder";
+
+          let html = `<div class="folder-header-row">
+                  <h3 class="folder-title">${escapeHtml(folder.name)}</h3>
+                  <div class="folder-actions">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="renameFolder(${i})">Update</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteFolder(${i})">Delete</button>
+                  </div>
+                </div>
+                  <div class="folder-add-row">
+                    <input type="file" class="input-file" onchange="addFile(${i}, this)">
+                  </div>
+                  <ul class="file-list">`;
+
+          if (folder.files.length === 0) {
+            html +=
+              '<li class="file-list-placeholder"><span class="file-name">No files in this folder yet.</span></li>';
+          }
+
+          folder.files.forEach((file, j) => {
+            html += `<li>
+          <span class="file-name">${escapeHtml(file.name)}</span>
+          <span class="file-actions">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="viewFileAt(${i}, ${j})">View</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="deleteFile(${i}, ${j})">Delete</button>
+          </span>
+        </li>`;
+          });
+
+          html += "</ul>";
+          div.innerHTML = html;
+          container.appendChild(div);
+        });
+      }
+
+      loadState();
+      renderFolders();
+    </script>
+  </body>
+</html>
