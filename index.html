@@ -114,16 +114,15 @@
       }
       .home-cover-photo {
         display: block;
-        width: min(320px, 72%);
-        aspect-ratio: 3 / 4;
-        height: auto;
+        width: 100%;
+        max-width: 500px;
+        height: 300px; /* controls landscape height */
         margin: 0 auto 20px;
-        border-radius: 10px;
-        object-fit: contain;
+        border-radius: 12px;
+        object-fit: cover; /* fills the box nicely */
         object-position: center;
-        background: rgba(0, 0, 0, 0.35);
-        border: 1px solid rgba(255, 255, 255, 0.55);
-        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.45);
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
       }
 
       /* MEMBERS & ACTIVITIES shared */
@@ -489,7 +488,7 @@
       <div class="overlay">
         <img
           class="home-cover-photo"
-          src="40f9ccc0-653e-4015-84f5-fc1548558e8b.jpg"
+          src="a6eed9ae-d72f-43a3-981f-6cbbee9cfca9.jpg"
           alt="Home cover photo"
         />
         <h1>TCW AND HISTORY ACTIVITIES COMPILATION</h1>
